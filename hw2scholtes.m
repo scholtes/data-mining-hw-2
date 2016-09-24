@@ -8,6 +8,13 @@
 
 clear all;
 close all;
+% Close tree view windows
+hiddenfigs = findall(0,'Type','figure', '-not', 'HandleVisibility', 'on');
+close(hiddenfigs);
+
+% Seed the random number generator for convenience
+% Can be removed if desired 
+rng(2016);
 
 % Part 1
 % Load data + covariance matrix
@@ -95,4 +102,14 @@ view(tree50, 'Mode', 'Graph');
 
 % Part 8 
 % Testing the trees and confusion matricies report
+test_attr = test_set(:,1:4);
+test_class = test_set(:,5);
 
+test_results_5 = tree5.predict(test_attr);
+confusion_5 = confusionmat(test_class, test_results_5);
+
+test_results_25 = tree25.predict(test_attr);
+confusion_25 = confusionmat(test_class, test_results_25);
+
+test_results_50 = tree50.predict(test_attr);
+confusion_50 = confusionmat(test_class, test_results_50);
