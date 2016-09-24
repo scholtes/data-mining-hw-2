@@ -2,6 +2,9 @@
 % 2016-09-24
 % Homework #2
 % Intelligent data analysis
+% 
+% NOTE: Created with MATLAB R2013a
+%       Using `ClassificationTree.fit` in lieu of `fitctree`
 
 clear all;
 close all;
@@ -72,14 +75,24 @@ permutation = randperm(size(d1, 1));
 % (2) The first 1000 entries of those shuffles produces 
 %     a random selection of indecies for the training set.
 %     The last entries of the shuffle represent the test set.
-train_set = d1(permutation(:,1:1000),:);
-test_set = d1(permutation(:,1001:size(d1, 1)),:);
+TRAIN_SIZE = 1000;
+train_set = d1(permutation(:,1:TRAIN_SIZE),:);
+test_set = d1(permutation(:,TRAIN_SIZE+1:end),:);
 
+% Part 7 
+% Create classification trees using the training data, while
+% experimenting with different pruning levels.
+train_attr = train_set(:,1:4);
+train_class = train_set(:,5);
 
+tree5 = ClassificationTree.fit(train_attr, train_class, 'MinLeaf', 5);
+tree25 = ClassificationTree.fit(train_attr, train_class, 'MinLeaf', 25);
+tree50 = ClassificationTree.fit(train_attr, train_class, 'MinLeaf', 50);
 
+view(tree5, 'Mode', 'Graph');
+view(tree25, 'Mode', 'Graph');
+view(tree50, 'Mode', 'Graph');
 
-
-
-
-
+% Part 8 
+% Testing the trees and confusion matricies report
 
