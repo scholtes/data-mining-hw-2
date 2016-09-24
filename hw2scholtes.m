@@ -73,7 +73,7 @@ title('class vs attr-2');
 xlabel('attr-2');
 ylabel('class');
 
-close all;
+% close all;
 % Part 6
 % Select a training set of 1000 randomly selected records
 
